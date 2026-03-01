@@ -29,3 +29,6 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+Project_Structure.md
+.env.example
