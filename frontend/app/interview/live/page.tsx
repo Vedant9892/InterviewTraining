@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { InterviewType } from "@/modules/interview/types";
 import { interviewEngine } from "@/modules/interview/interviewEngine";
@@ -10,10 +10,11 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ROUTES } from "@/lib/routes";
 
-export default function LiveInterviewPage() {
+function LiveInterviewContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [session, setSession] = useState<any>(null);
   const [currentQuestion, setCurrentQuestion] = useState<any>(null);
@@ -59,12 +60,15 @@ export default function LiveInterviewPage() {
     }, 2000);
 
     return () => {
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
       clearInterval(interval);
     };
   }, [searchParams]);
+
+  useEffect(() => {
+    return () => {
+      stream?.getTracks().forEach((track) => track.stop());
+    };
+  }, [stream]);
 
   const handleNext = () => {
     if (!session) return;
@@ -210,5 +214,13 @@ export default function LiveInterviewPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LiveInterviewPage() {
+  return (
+    <Suspense fallback={<div className="app-background min-h-screen flex items-center justify-center"><p className="text-[var(--text-secondary)]">Loading...</p></div>}>
+      <LiveInterviewContent />
+    </Suspense>
   );
 }
