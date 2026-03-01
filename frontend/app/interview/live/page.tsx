@@ -41,6 +41,7 @@ function LiveInterviewContent() {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((mediaStream) => {
+        streamRef.current = mediaStream;
         setStream(mediaStream);
         if (videoRef.current) {
           videoRef.current.srcObject = mediaStream;
@@ -61,14 +62,10 @@ function LiveInterviewContent() {
 
     return () => {
       clearInterval(interval);
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
     };
   }, [searchParams]);
-
-  useEffect(() => {
-    return () => {
-      stream?.getTracks().forEach((track) => track.stop());
-    };
-  }, [stream]);
 
   const handleNext = () => {
     if (!session) return;
