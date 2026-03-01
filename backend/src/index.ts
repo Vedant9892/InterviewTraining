@@ -5,7 +5,7 @@
 
 import express from "express";
 import cors from "cors";
-import { faceRecognitionRouter } from "./routes/face-recognition.js";
+import { faceRecognitionRouter } from "./routes/face-recognition";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
