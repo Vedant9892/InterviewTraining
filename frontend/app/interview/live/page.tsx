@@ -144,17 +144,17 @@ function LiveInterviewContent() {
             <Card title="Real-Time Analysis">
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 <ProgressRing value={metrics.eyeContact} label="Eye Contact" size={64} />
-                <ProgressRing value={metrics.confidence} label="Confidence" size={80} />
-                <ProgressRing value={metrics.speakingPace} label="Speaking Pace" size={80} />
-                <ProgressRing value={metrics.clarity} label="Clarity" size={80} />
+                <ProgressRing value={metrics.confidence} label="Confidence" size={64} />
+                <ProgressRing value={metrics.speakingPace} label="Speaking Pace" size={64} />
+                <ProgressRing value={metrics.clarity} label="Clarity" size={64} />
               </div>
             </Card>
           </div>
 
-          <div className="col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 order-1 lg:order-2">
             <Card title={`Question ${(session?.currentQuestionIndex || 0) + 1}`}>
-              <div className="bg-[var(--bg-primary)] rounded-lg p-6 mb-6">
-                <p className="text-lg text-white leading-relaxed">
+              <div className="bg-[var(--bg-primary)] rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
+                <p className="text-base sm:text-lg text-white leading-relaxed">
                   {currentQuestion?.question || "Loading question..."}
                 </p>
               </div>
@@ -177,33 +177,32 @@ function LiveInterviewContent() {
             </Card>
 
             <Card>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
                 <button
                   onClick={handlePrevious}
                   disabled={session?.currentQuestionIndex === 0}
-                  className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed min-h-[48px] order-2 sm:order-1"
                 >
                   Previous
                 </button>
 
-                <div className="flex space-x-3">
+                <div className="flex gap-3 order-1 sm:order-2 justify-center">
                   <button
                     onClick={() => setIsRecording(!isRecording)}
-                    className="btn-primary bg-red-500 hover:bg-red-600"
+                    className="btn-primary flex-1 sm:flex-none bg-red-500 hover:bg-red-600 min-h-[48px]"
                   >
                     {isRecording ? "Stop Recording" : "Start Recording"}
                   </button>
+                  <button onClick={handleNext} className="btn-primary flex-1 sm:flex-none min-h-[48px]">
+                    Next Question
+                  </button>
                 </div>
-
-                <button onClick={handleNext} className="btn-primary">
-                  Next Question
-                </button>
               </div>
             </Card>
 
             <button
               onClick={handleComplete}
-              className="w-full btn-primary bg-green-600 hover:bg-green-700 py-4 text-lg"
+              className="w-full btn-primary bg-green-600 hover:bg-green-700 py-3.5 sm:py-4 text-base sm:text-lg min-h-[48px]"
             >
               Complete Interview
             </button>

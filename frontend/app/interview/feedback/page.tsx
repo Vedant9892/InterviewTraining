@@ -56,7 +56,7 @@ export default function FeedbackPage() {
   return (
     <div className="app-background min-h-screen">
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             <Link href={ROUTES.DASHBOARD} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
