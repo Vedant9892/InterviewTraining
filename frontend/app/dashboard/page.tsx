@@ -54,13 +54,13 @@ export default function DashboardPage() {
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
-            <Link href={ROUTES.HOME} className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-              <span className="text-xl font-semibold text-white">InterviewTraining</span>
+            <Link href={ROUTES.HOME} className="flex items-center space-x-2 min-w-0">
+              <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
+              <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <StatusBadge status="active" label="Active" />
-              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary">
+              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary text-sm sm:text-base px-3 sm:px-4 py-2 min-h-[44px]">
                 New Session
               </Link>
             </div>
@@ -68,44 +68,44 @@ export default function DashboardPage() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 py-16">
-        <div className="mb-12 fade-in">
-          <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-lg text-[var(--text-secondary)]">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div className="mb-8 sm:mb-12 fade-in">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Dashboard</h1>
+          <p className="text-base sm:text-lg text-[var(--text-secondary)]">
             Track your progress and review past sessions
           </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card>
             <p className="text-sm text-[var(--text-secondary)] mb-1">Total Sessions</p>
-            <p className="text-4xl font-bold text-white">{stats.totalSessions}</p>
+            <p className="text-2xl sm:text-4xl font-bold text-white">{stats.totalSessions}</p>
             <p className="text-xs text-green-400 mt-1">+1 this week</p>
           </Card>
 
           <Card>
             <p className="text-sm text-[var(--text-secondary)] mb-1">Average Score</p>
-            <p className="text-4xl font-bold text-white">{stats.averageScore}</p>
+            <p className="text-2xl sm:text-4xl font-bold text-white">{stats.averageScore}</p>
             <p className="text-xs text-blue-400 mt-1">Above target</p>
           </Card>
 
           <Card>
             <p className="text-sm text-[var(--text-secondary)] mb-1">Practice Time</p>
-            <p className="text-4xl font-bold text-white">{stats.totalTime}</p>
+            <p className="text-2xl sm:text-4xl font-bold text-white">{stats.totalTime}</p>
             <p className="text-xs text-[var(--text-secondary)] mt-1">Total duration</p>
           </Card>
 
           <Card>
             <p className="text-sm text-[var(--text-secondary)] mb-1">Skill Level</p>
-            <p className="text-4xl font-bold text-white">{stats.skillLevel}</p>
+            <p className="text-2xl sm:text-4xl font-bold text-white">{stats.skillLevel}</p>
             <p className="text-xs text-green-400 mt-1">Improving</p>
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card title="Average Performance">
-            <div className="grid grid-cols-2 gap-6 py-4">
-              <ProgressRing value={averageMetrics.confidence} label="Confidence" size={100} />
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 py-4">
+              <ProgressRing value={averageMetrics.confidence} label="Confidence" size={80} />
               <ProgressRing value={averageMetrics.communication} label="Communication" size={100} />
               <ProgressRing value={averageMetrics.engagement} label="Engagement" size={100} />
               <ProgressRing value={averageMetrics.composure} label="Composure" size={100} />
