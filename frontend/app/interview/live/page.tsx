@@ -91,12 +91,12 @@ function LiveInterviewContent() {
   return (
     <div className="app-background min-h-screen">
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
-        <div className="max-w-[1800px] mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+            <div className="flex items-center gap-2 sm:gap-6 min-w-0">
+              <div className="flex items-center space-x-2 flex-shrink-0">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-                <span className="text-lg font-semibold text-white">InterviewTraining</span>
+                <span className="text-base sm:text-lg font-semibold text-white truncate">InterviewTraining</span>
               </div>
               <StatusBadge
                 status={isRecording ? "recording" : "active"}
@@ -104,11 +104,11 @@ function LiveInterviewContent() {
               />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-[var(--text-secondary)]">
-                Question {(session?.currentQuestionIndex || 0) + 1} of {session?.questions?.length || 5}
+            <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+              <span className="text-xs sm:text-sm text-[var(--text-secondary)] flex-shrink-0">
+                Q {(session?.currentQuestionIndex || 0) + 1}/{session?.questions?.length || 5}
               </span>
-              <div className="w-32 h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
+              <div className="flex-1 sm:flex-none sm:w-32 h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden min-w-[60px]">
                 <div
                   className="h-full bg-blue-500 transition-all duration-500"
                   style={{ width: `${progress}%` }}
@@ -120,9 +120,9 @@ function LiveInterviewContent() {
         </div>
       </nav>
 
-      <div className="max-w-[1800px] mx-auto px-6 py-6">
-        <div className="grid grid-cols-3 gap-6">
-          <div className="col-span-1 space-y-6">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6 order-2 lg:order-1">
             <Card title="Video Feed (Face Recognition Ready)">
               <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-black">
                 <video
@@ -142,8 +142,8 @@ function LiveInterviewContent() {
             </Card>
 
             <Card title="Real-Time Analysis">
-              <div className="grid grid-cols-2 gap-6">
-                <ProgressRing value={metrics.eyeContact} label="Eye Contact" size={80} />
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <ProgressRing value={metrics.eyeContact} label="Eye Contact" size={64} />
                 <ProgressRing value={metrics.confidence} label="Confidence" size={80} />
                 <ProgressRing value={metrics.speakingPace} label="Speaking Pace" size={80} />
                 <ProgressRing value={metrics.clarity} label="Clarity" size={80} />

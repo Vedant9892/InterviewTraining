@@ -216,7 +216,7 @@ export default function InterviewSetupPage() {
                 <button
                   onClick={handleRequestPermissions}
                   disabled={calibrating}
-                  className="btn-primary"
+                  className="btn-primary min-h-[48px] px-8"
                 >
                   {calibrating ? "Requesting Access..." : "Grant Access"}
                 </button>

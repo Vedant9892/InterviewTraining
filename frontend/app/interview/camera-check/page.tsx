@@ -71,8 +71,8 @@ function CameraCheckContent() {
   }
 
   return (
-    <div className="app-background min-h-screen flex items-center justify-center p-6">
-      <Card className="max-w-md w-full p-8 text-center">
+    <div className="app-background min-h-screen min-h-[100dvh] flex items-center justify-center p-4 sm:p-6">
+      <Card className="max-w-md w-full p-6 sm:p-8 text-center">
         {status === "requesting" && (
           <>
             <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
@@ -101,7 +101,7 @@ function CameraCheckContent() {
             <p className="text-[var(--text-secondary)] mb-6">
               Position yourself in frame. Click below to start the interview.
             </p>
-            <button onClick={handleContinue} className="btn-primary w-full">
+            <button onClick={handleContinue} className="btn-primary w-full min-h-[48px]">
               Continue to Interview
             </button>
           </>
@@ -126,11 +126,11 @@ function CameraCheckContent() {
             </div>
             <h2 className="text-xl font-semibold text-white mb-2">Camera Access Needed</h2>
             <p className="text-[var(--text-secondary)] mb-6">{error}</p>
-            <div className="flex gap-3">
-              <button onClick={handleRetry} className="btn-primary flex-1">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button onClick={handleRetry} className="btn-primary flex-1 min-h-[48px]">
                 Try Again
               </button>
-              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-secondary flex-1 text-center">
+              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-secondary flex-1 text-center min-h-[48px] inline-flex items-center justify-center">
                 Go Back
               </Link>
             </div>
