@@ -13,6 +13,7 @@ export default function InterviewSetupPage() {
   const [selectedType, setSelectedType] = useState<InterviewType | null>(null);
   const [permissionsGranted, setPermissionsGranted] = useState(false);
   const [calibrating, setCalibrating] = useState(false);
+  const [isStarting, setIsStarting] = useState(false);
 
   const handleRequestPermissions = async () => {
     setCalibrating(true);
@@ -41,6 +42,7 @@ export default function InterviewSetupPage() {
       alert("Please grant camera and microphone permissions");
       return;
     }
+    setIsStarting(true);
     router.push(`${ROUTES.INTERVIEW.CAMERA_CHECK}?type=${encodeURIComponent(selectedType)}`);
   };
 
@@ -248,15 +250,68 @@ export default function InterviewSetupPage() {
         <div className="text-center">
           <button
             onClick={handleStart}
-            disabled={!selectedType || !permissionsGranted}
-            className={`btn-primary text-lg px-12 py-4 ${
-              !selectedType || !permissionsGranted ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            disabled={!selectedType || !permissionsGranted || isStarting}
+            className={`
+              relative overflow-hidden inline-flex items-center justify-center gap-3
+              text-lg font-semibold px-10 py-4 rounded-xl
+              transition-all duration-300 ease-out
+              ${
+                selectedType && permissionsGranted && !isStarting
+                  ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                  : "bg-[var(--bg-elevated)] text-[var(--text-tertiary)] border border-[var(--border-subtle)] cursor-not-allowed opacity-60"
+              }
+            `}
           >
-            Start Interview
+            {isStarting ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                <span>Starting...</span>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Start Interview</span>
+              </>
+            )}
           </button>
-          {selectedType && permissionsGranted && (
-            <p className="text-sm text-green-400 mt-4">Ready to begin</p>
+          {selectedType && permissionsGranted && !isStarting && (
+            <p className="text-sm text-green-400/90 mt-4 flex items-center justify-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Ready to begin
+            </p>
           )}
         </div>
       </main>
