@@ -38,6 +38,7 @@ body {
 .app-background {
   background: linear-gradient(180deg, #0a0e1a 0%, #131824 100%);
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport for mobile browser chrome */
 }
 
 .card {

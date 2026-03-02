@@ -17,10 +17,10 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={`card p-6 ${hover ? "" : "hover:border-[var(--border-subtle)]"} ${className}`}
+      className={`card p-4 sm:p-6 ${hover ? "" : "hover:border-[var(--border-subtle)]"} ${className}`}
     >
       {title && (
-        <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>
+        <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">{title}</h3>
       )}
       {children}
     </div>
