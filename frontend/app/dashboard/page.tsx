@@ -179,7 +179,7 @@ export default function DashboardPage() {
               <p className="text-[var(--text-secondary)] mb-6">
                 Continue improving with AI and face recognition practice
               </p>
-              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary inline-block">
+              <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary inline-flex min-h-[48px] items-center">
                 Begin Practice
               </Link>
             </div>
@@ -191,7 +191,7 @@ export default function DashboardPage() {
               <p className="text-[var(--text-secondary)] mb-6">
                 Analyze improvement trends and identify areas for growth
               </p>
-              <button className="btn-primary inline-block">View Analytics</button>
+              <button className="btn-primary inline-flex min-h-[48px] items-center">View Analytics</button>
             </div>
           </Card>
         </div>
