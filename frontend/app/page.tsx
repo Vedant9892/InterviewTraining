@@ -47,25 +47,25 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6">
-        <div className="py-24 text-center fade-in">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="py-12 sm:py-16 md:py-24 text-center fade-in">
           <StatusBadge status="active" label="AI + Face Recognition" size="md" />
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white mt-6 mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 sm:mt-6 mb-4 sm:mb-6 leading-tight">
             Improve Your Interview
             <br />
             Presence with AI
           </h1>
 
-          <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed mb-12">
+          <p className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-12 px-1">
             Real-time feedback on communication style, body language, and confidence. Face recognition
             models analyze your behavioral patterns for better interviews.
           </p>
 
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 mb-8">
             <Link
               href={ROUTES.INTERVIEW.SETUP}
-              className="inline-flex items-center gap-3 btn-primary text-lg px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-3 btn-primary text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -77,7 +77,7 @@ export default function HomePage() {
               </svg>
               Start Practice Session
             </Link>
-            <Link href="#features" className="btn-secondary text-lg px-8 py-4">
+            <Link href="#features" className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4 min-h-[48px] inline-flex items-center justify-center">
               Learn More
             </Link>
           </div>
@@ -87,22 +87,22 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-16 sm:mb-24">
           <Card>
             <div className="text-center">
-              <div className="text-4xl font-bold text-white mb-2">Real-time</div>
+              <div className="text-2xl sm:text-4xl font-bold text-white mb-2">Real-time</div>
               <p className="text-[var(--text-secondary)]">Behavioral + Face Analysis</p>
             </div>
           </Card>
           <Card>
             <div className="text-center">
-              <div className="text-4xl font-bold text-white mb-2">Multi-modal</div>
+              <div className="text-2xl sm:text-4xl font-bold text-white mb-2">Multi-modal</div>
               <p className="text-[var(--text-secondary)]">Audio, Video, Face</p>
             </div>
           </Card>
           <Card>
             <div className="text-center">
-              <div className="text-4xl font-bold text-white mb-2">Actionable</div>
+              <div className="text-2xl sm:text-4xl font-bold text-white mb-2">Actionable</div>
               <p className="text-[var(--text-secondary)]">Improvement Insights</p>
             </div>
           </Card>
