@@ -8,6 +8,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   INTERVIEW: {
     SETUP: "/interview/setup",
+    CAMERA_CHECK: "/interview/camera-check",
     LIVE: "/interview/live",
     FEEDBACK: "/interview/feedback",
   },

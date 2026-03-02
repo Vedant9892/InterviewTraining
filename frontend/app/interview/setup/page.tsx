@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { ROUTES, interviewLiveUrl } from "@/lib/routes";
+import { ROUTES } from "@/lib/routes";
 
 export default function InterviewSetupPage() {
   const router = useRouter();
@@ -41,7 +41,7 @@ export default function InterviewSetupPage() {
       alert("Please grant camera and microphone permissions");
       return;
     }
-    router.push(interviewLiveUrl(selectedType));
+    router.push(`${ROUTES.INTERVIEW.CAMERA_CHECK}?type=${encodeURIComponent(selectedType)}`);
   };
 
   return (
