@@ -86,29 +86,29 @@ export default function FeedbackPage() {
         </Card>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
-          <Card className="text-center py-8">
+          <Card className="text-center py-6 sm:py-8">
             <ProgressRing value={scores.confidence} size={80} strokeWidth={6} />
             <p className="mt-4 text-base sm:text-lg font-semibold text-white">Confidence</p>
             <p className="text-sm text-[var(--text-secondary)]">Body language & tone</p>
           </Card>
-          <Card className="text-center py-8">
+          <Card className="text-center py-6 sm:py-8">
             <ProgressRing value={scores.communication} size={80} strokeWidth={6} />
             <p className="mt-4 text-base sm:text-lg font-semibold text-white">Communication</p>
             <p className="text-sm text-[var(--text-secondary)]">Clarity & structure</p>
           </Card>
-          <Card className="text-center py-8">
+          <Card className="text-center py-6 sm:py-8">
             <ProgressRing value={scores.engagement} size={80} strokeWidth={6} />
             <p className="mt-4 text-base sm:text-lg font-semibold text-white">Engagement</p>
             <p className="text-sm text-[var(--text-secondary)]">Eye contact & energy</p>
           </Card>
-          <Card className="text-center py-8">
+          <Card className="text-center py-6 sm:py-8">
             <ProgressRing value={scores.composure} size={80} strokeWidth={6} />
             <p className="mt-4 text-base sm:text-lg font-semibold text-white">Composure</p>
             <p className="text-sm text-[var(--text-secondary)]">Calmness under pressure</p>
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card title="Visual Analysis">
             <div className="space-y-4">
               <ProgressBar value={detailedMetrics.eyeContact} label="Eye Contact" />
@@ -136,7 +136,7 @@ export default function FeedbackPage() {
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card title="Strengths" className="border-green-500/20 bg-green-500/5">
             <ul className="space-y-3">
               {strengths.map((strength, index) => (
@@ -207,7 +207,7 @@ export default function FeedbackPage() {
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
             <div className="flex items-center justify-between">
               <div>
@@ -215,7 +215,7 @@ export default function FeedbackPage() {
                 <p className="text-[var(--text-secondary)] mb-6">
                   Apply these insights in your next practice session
                 </p>
-                <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary inline-block">
+                <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary inline-flex min-h-[48px] items-center">
                   Start New Session
                 </Link>
               </div>
@@ -229,7 +229,7 @@ export default function FeedbackPage() {
                 <p className="text-[var(--text-secondary)] mb-6">
                   Track your progress and review past sessions
                 </p>
-                <Link href={ROUTES.DASHBOARD} className="btn-primary inline-block">
+                <Link href={ROUTES.DASHBOARD} className="btn-primary inline-flex min-h-[48px] items-center">
                   Go to Dashboard
                 </Link>
               </div>
