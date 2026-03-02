@@ -108,17 +108,17 @@ export default function HomePage() {
           </Card>
         </div>
 
-        <div id="features" className="mb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
+        <div id="features" className="mb-16 sm:mb-24">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
               Comprehensive Behavioral Analysis
             </h2>
-            <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto px-2">
               AI and face recognition analyze multiple dimensions of your interview performance.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Card>
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -205,23 +205,23 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="pb-24">
-          <Card className="text-center py-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
-            <h2 className="text-3xl font-bold text-white mb-4">
+        <div className="pb-16 sm:pb-24">
+          <Card className="text-center py-10 sm:py-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
               Ready to improve your interview skills?
             </h2>
-            <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-[var(--text-secondary)] mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
               Start practicing with AI and face recognition feedback.
             </p>
-            <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary text-lg px-8 py-4 inline-block">
+            <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4 inline-flex items-center justify-center min-h-[48px]">
               Start Your First Session
             </Link>
           </Card>
         </div>
       </main>
 
-      <footer className="border-t border-[var(--border-subtle)] py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+      <footer className="border-t border-[var(--border-subtle)] py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-sm text-[var(--text-tertiary)]">
             © 2026 InterviewTraining. Built with AI and face recognition.
           </p>
