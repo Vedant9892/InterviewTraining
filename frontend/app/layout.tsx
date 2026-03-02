@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "InterviewTraining - Master Your Interview Presence",
   description:
     "AI-powered behavioral interview coach with face recognition - analyzes confidence, communication, and interview presence",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    viewportFit: "cover",
+  },
 };
 
 export default function RootLayout({
