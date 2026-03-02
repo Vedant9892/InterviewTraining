@@ -106,9 +106,9 @@ export default function DashboardPage() {
           <Card title="Average Performance">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 py-4">
               <ProgressRing value={averageMetrics.confidence} label="Confidence" size={80} />
-              <ProgressRing value={averageMetrics.communication} label="Communication" size={100} />
-              <ProgressRing value={averageMetrics.engagement} label="Engagement" size={100} />
-              <ProgressRing value={averageMetrics.composure} label="Composure" size={100} />
+              <ProgressRing value={averageMetrics.communication} label="Communication" size={80} />
+              <ProgressRing value={averageMetrics.engagement} label="Engagement" size={80} />
+              <ProgressRing value={averageMetrics.composure} label="Composure" size={80} />
             </div>
           </Card>
 
@@ -129,8 +129,8 @@ export default function DashboardPage() {
                 key={session.id}
                 className="surface p-4 rounded-lg hover:border-[var(--border-default)] transition-all cursor-pointer"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 flex-1">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex items-center space-x-4 flex-1 min-w-0">
                     <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
                       <svg
                         className="w-6 h-6 text-blue-400"
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-base font-semibold text-white mb-1">{session.type}</h3>
-                      <div className="flex items-center space-x-4 text-sm text-[var(--text-secondary)]">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--text-secondary)]">
                         <span>{session.date}</span>
                         <span>{session.duration}</span>
                         <StatusBadge status="completed" label="Completed" size="sm" />
@@ -162,7 +162,7 @@ export default function DashboardPage() {
                         Grade: <span className="text-white font-medium">{session.grade}</span>
                       </p>
                     </div>
-                    <Link href={ROUTES.INTERVIEW.FEEDBACK} className="btn-secondary px-4 py-2 text-sm">
+                    <Link href={ROUTES.INTERVIEW.FEEDBACK} className="btn-secondary px-4 py-2 text-sm min-h-[44px] inline-flex items-center">
                       View Report
                     </Link>
                   </div>
