@@ -9,22 +9,22 @@ export default function HomePage() {
   return (
     <div className="app-background min-h-screen">
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-              <span className="text-xl font-semibold text-white">InterviewTraining</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex items-center space-x-2 min-w-0">
+              <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
+              <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <Link
                 href={ROUTES.DASHBOARD}
-                className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium"
+                className="hidden sm:inline text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2"
               >
                 Dashboard
               </Link>
               <Link
                 href={ROUTES.INTERVIEW.SETUP}
-                className="inline-flex items-center gap-2 btn-primary rounded-lg hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 btn-primary rounded-lg hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-200 px-3 sm:px-4 py-2.5 text-sm sm:text-base"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
