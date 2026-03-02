@@ -49,11 +49,11 @@ export default function InterviewSetupPage() {
   return (
     <div className="app-background min-h-screen">
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
-            <Link href={ROUTES.HOME} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-              <span className="text-xl font-semibold text-white">InterviewTraining</span>
+            <Link href={ROUTES.HOME} className="flex items-center space-x-2 hover:opacity-80 transition-opacity min-w-0">
+              <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
+              <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
             <StatusBadge
               status={permissionsGranted ? "ready" : "inactive"}
@@ -63,20 +63,20 @@ export default function InterviewSetupPage() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 py-16">
-        <div className="text-center mb-12 fade-in">
-          <h1 className="text-4xl font-bold text-white mb-4">Interview Setup</h1>
-          <p className="text-lg text-[var(--text-secondary)]">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div className="text-center mb-8 sm:mb-12 fade-in">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Interview Setup</h1>
+          <p className="text-base sm:text-lg text-[var(--text-secondary)]">
             Configure your practice session (with face recognition support)
           </p>
         </div>
 
         <div className="mb-12">
           <h2 className="text-xl font-semibold text-white mb-4">Select Interview Type</h2>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             <button
               onClick={() => setSelectedType(InterviewType.HR_BEHAVIORAL)}
-              className={`card text-left p-6 transition-all ${
+              className={`card text-left p-4 sm:p-6 transition-all min-h-[44px] ${
                 selectedType === InterviewType.HR_BEHAVIORAL
                   ? "active-glow border-blue-500"
                   : "hover:border-[var(--border-default)]"
@@ -112,7 +112,7 @@ export default function InterviewSetupPage() {
 
             <button
               onClick={() => setSelectedType(InterviewType.CONFIDENCE_ASSESSMENT)}
-              className={`card text-left p-6 transition-all ${
+              className={`card text-left p-4 sm:p-6 transition-all min-h-[44px] ${
                 selectedType === InterviewType.CONFIDENCE_ASSESSMENT
                   ? "active-glow border-blue-500"
                   : "hover:border-[var(--border-default)]"
@@ -148,7 +148,7 @@ export default function InterviewSetupPage() {
 
             <button
               onClick={() => setSelectedType(InterviewType.LEADERSHIP_COMMUNICATION)}
-              className={`card text-left p-6 transition-all ${
+              className={`card text-left p-4 sm:p-6 transition-all min-h-[44px] ${
                 selectedType === InterviewType.LEADERSHIP_COMMUNICATION
                   ? "active-glow border-blue-500"
                   : "hover:border-[var(--border-default)]"
@@ -253,7 +253,7 @@ export default function InterviewSetupPage() {
             disabled={!selectedType || !permissionsGranted || isStarting}
             className={`
               relative overflow-hidden inline-flex items-center justify-center gap-3
-              text-lg font-semibold px-10 py-4 rounded-xl
+              text-base sm:text-lg font-semibold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl min-h-[48px]
               transition-all duration-300 ease-out
               ${
                 selectedType && permissionsGranted && !isStarting
