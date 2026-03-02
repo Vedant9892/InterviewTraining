@@ -58,26 +58,26 @@ export default function FeedbackPage() {
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
-            <Link href={ROUTES.DASHBOARD} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-              <span className="text-xl font-semibold text-white">InterviewTraining</span>
+            <Link href={ROUTES.DASHBOARD} className="flex items-center space-x-2 hover:opacity-80 transition-opacity min-w-0">
+              <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
+              <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
             <StatusBadge status="completed" label="Analysis Complete" />
           </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 py-16">
-        <div className="text-center mb-12 fade-in">
-          <h1 className="text-4xl font-bold text-white mb-2">Performance Report</h1>
-          <p className="text-lg text-[var(--text-secondary)]">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <div className="text-center mb-8 sm:mb-12 fade-in">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Performance Report</h1>
+          <p className="text-base sm:text-lg text-[var(--text-secondary)]">
             {reportData.date} • {reportData.duration} • {reportData.questionsAnswered} questions
           </p>
         </div>
 
         <Card className="mb-12 text-center py-12 bg-gradient-to-br from-blue-500/5 to-purple-500/5 border-blue-500/20">
           <div className="inline-block mb-4">
-            <div className="text-8xl font-bold bg-gradient-to-br from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <div className="text-6xl sm:text-8xl font-bold bg-gradient-to-br from-blue-400 to-purple-500 bg-clip-text text-transparent">
               {reportData.overallScore}
             </div>
           </div>
@@ -85,25 +85,25 @@ export default function FeedbackPage() {
           <p className="text-lg text-[var(--text-secondary)]">Grade: {reportData.grade}</p>
         </Card>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card className="text-center py-8">
-            <ProgressRing value={scores.confidence} size={100} strokeWidth={8} />
-            <p className="mt-4 text-lg font-semibold text-white">Confidence</p>
+            <ProgressRing value={scores.confidence} size={80} strokeWidth={6} />
+            <p className="mt-4 text-base sm:text-lg font-semibold text-white">Confidence</p>
             <p className="text-sm text-[var(--text-secondary)]">Body language & tone</p>
           </Card>
           <Card className="text-center py-8">
-            <ProgressRing value={scores.communication} size={100} strokeWidth={8} />
-            <p className="mt-4 text-lg font-semibold text-white">Communication</p>
+            <ProgressRing value={scores.communication} size={80} strokeWidth={6} />
+            <p className="mt-4 text-base sm:text-lg font-semibold text-white">Communication</p>
             <p className="text-sm text-[var(--text-secondary)]">Clarity & structure</p>
           </Card>
           <Card className="text-center py-8">
-            <ProgressRing value={scores.engagement} size={100} strokeWidth={8} />
-            <p className="mt-4 text-lg font-semibold text-white">Engagement</p>
+            <ProgressRing value={scores.engagement} size={80} strokeWidth={6} />
+            <p className="mt-4 text-base sm:text-lg font-semibold text-white">Engagement</p>
             <p className="text-sm text-[var(--text-secondary)]">Eye contact & energy</p>
           </Card>
           <Card className="text-center py-8">
-            <ProgressRing value={scores.composure} size={100} strokeWidth={8} />
-            <p className="mt-4 text-lg font-semibold text-white">Composure</p>
+            <ProgressRing value={scores.composure} size={80} strokeWidth={6} />
+            <p className="mt-4 text-base sm:text-lg font-semibold text-white">Composure</p>
             <p className="text-sm text-[var(--text-secondary)]">Calmness under pressure</p>
           </Card>
         </div>
