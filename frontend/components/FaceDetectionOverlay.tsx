@@ -9,6 +9,7 @@ export interface FaceBox {
   top: number;
   width: number;
   height: number;
+  landmarks?: [number, number][];
 }
 
 interface FaceDetectionOverlayProps {
@@ -92,16 +93,31 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
           const offsetX = (videoWidth - videoRect.width / scale) / 2;
           const offsetY = (videoHeight - videoRect.height / scale) / 2;
 
+          const transform = (x: number, y: number) => ({
+            x: (x - offsetX) * scale,
+            y: (y - offsetY) * scale,
+          });
+
           const left = (topLeft[0] - offsetX) * scale;
           const top = (topLeft[1] - offsetY) * scale;
           const width = (bottomRight[0] - topLeft[0]) * scale;
           const height = (bottomRight[1] - topLeft[1]) * scale;
+
+          // Transform landmarks to display coordinates
+          let landmarks: [number, number][] | undefined;
+          if (face.landmarks && Array.isArray(face.landmarks)) {
+            landmarks = face.landmarks.map((lm) => {
+              const p = transform(lm[0], lm[1]);
+              return [p.x, p.y];
+            });
+          }
 
           setFaceBox({
             left: Math.max(0, left),
             top: Math.max(0, top),
             width,
             height,
+            landmarks,
           });
           onFaceDetected?.(true);
         } else {
@@ -132,7 +148,7 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       {faceBox && (
         <div
-          className="absolute border-2 border-green-400 rounded-lg bg-green-500/10 box-border transition-all duration-150"
+          className="absolute box-border transition-all duration-150"
           style={{
             left: faceBox.left,
             top: faceBox.top,
@@ -140,9 +156,22 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
             height: faceBox.height,
           }}
         >
-          <div className="absolute -top-6 left-0 flex items-center gap-1.5 bg-green-500/90 text-white text-xs font-medium px-2 py-1 rounded">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            Face detected
+          {/* Bright green rectangular box - directly on the face */}
+          <div className="absolute inset-0 border-[3px] border-green-500 rounded-none" />
+          {/* Facial landmark dots inside the box */}
+          {faceBox.landmarks?.map(([x, y], i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 -ml-1 -mt-1 rounded-full bg-green-500"
+              style={{
+                left: x - faceBox.left,
+                top: y - faceBox.top,
+              }}
+            />
+          ))}
+          {/* "face" label at top-left corner of box */}
+          <div className="absolute top-0 left-0 bg-green-500 text-white text-[10px] font-medium uppercase px-1.5 py-0.5 -translate-y-full mt-0.5">
+            face
           </div>
         </div>
       )}
