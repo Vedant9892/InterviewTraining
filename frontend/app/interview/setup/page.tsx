@@ -210,9 +210,15 @@ export default function InterviewSetupPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[var(--text-secondary)] mb-6">
+                <p className="text-[var(--text-secondary)] mb-4">
                   Required for face recognition and audio analysis. All processing happens locally.
                 </p>
+                <Link
+                  href={ROUTES.CHECK_CAMERA}
+                  className="inline-block text-sm text-blue-400 hover:text-blue-300 mb-6 transition-colors"
+                >
+                  Test your camera & microphone first →
+                </Link>
                 <button
                   onClick={handleRequestPermissions}
                   disabled={calibrating}

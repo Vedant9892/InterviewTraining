@@ -17,6 +17,12 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <Link
+                href={ROUTES.CHECK_CAMERA}
+                className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2"
+              >
+                Check Camera
+              </Link>
+              <Link
                 href={ROUTES.DASHBOARD}
                 className="hidden sm:inline text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2"
               >

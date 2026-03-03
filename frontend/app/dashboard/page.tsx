@@ -59,6 +59,9 @@ export default function DashboardPage() {
               <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
             <div className="flex items-center gap-2 sm:gap-4">
+              <Link href={ROUTES.CHECK_CAMERA} className="btn-secondary text-sm px-3 py-2 min-h-[44px] hidden sm:inline-flex items-center">
+                Check Camera
+              </Link>
               <StatusBadge status="active" label="Active" />
               <Link href={ROUTES.INTERVIEW.SETUP} className="btn-primary text-sm sm:text-base px-3 sm:px-4 py-2 min-h-[44px]">
                 New Session
