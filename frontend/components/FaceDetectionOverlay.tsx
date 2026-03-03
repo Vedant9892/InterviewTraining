@@ -64,23 +64,59 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
 
     const video = videoRef.current;
 
-    const detect = async () => {
-      if (!video || video.readyState < 2 || !modelRef.current) return;
+    const getConfidence = (probability: unknown): number => {
+      if (typeof probability === "number") {
+        return probability;
+      }
 
+      if (Array.isArray(probability) && typeof probability[0] === "number") {
+        return probability[0];
+      }
+
+      if (ArrayBuffer.isView(probability)) {
+        const value = (probability as unknown as ArrayLike<number>)[0];
+        return typeof value === "number" ? value : 0;
+      }
+
+      return 0;
+    };
+
+    const getPoint = (point: unknown): [number, number] => {
+      if (Array.isArray(point) && typeof point[0] === "number" && typeof point[1] === "number") {
+        return [point[0], point[1]];
+      }
+
+      if (ArrayBuffer.isView(point)) {
+        const typedPoint = point as unknown as ArrayLike<number>;
+        const x = typedPoint[0];
+        const y = typedPoint[1];
+        if (typeof x === "number" && typeof y === "number") {
+          return [x, y];
+        }
+      }
+
+      return [0, 0];
+    };
+
+    const detect = async () => {
       try {
+        if (!video || !modelRef.current || video.readyState < 2 || video.videoWidth === 0 || video.videoHeight === 0) {
+          setFaceBox(null);
+          onFaceDetected?.(false);
+          return;
+        }
+
         const predictions = await modelRef.current.estimateFaces(video, false, true);
 
         if (predictions.length > 0) {
           const face = predictions[0];
-          const topLeft = Array.isArray(face.topLeft) ? face.topLeft : [0, 0];
-          const bottomRight = Array.isArray(face.bottomRight) ? face.bottomRight : [0, 0];
-          const prob = face.probability;
-          const confidence = typeof prob === "number" ? prob : (Array.isArray(prob) ? prob[0] : 0);
+          const topLeft = getPoint(face.topLeft);
+          const bottomRight = getPoint(face.bottomRight);
+          const confidence = getConfidence(face.probability);
 
-          if (confidence < 0.5) {
+          if (confidence < 0.3) {
             setFaceBox(null);
             onFaceDetected?.(false);
-            animationRef.current = requestAnimationFrame(detect);
             return;
           }
 
@@ -115,7 +151,6 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
           ) {
             setFaceBox(null);
             onFaceDetected?.(false);
-            animationRef.current = requestAnimationFrame(detect);
             return;
           }
 
@@ -143,9 +178,9 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
       } catch {
         setFaceBox(null);
         onFaceDetected?.(false);
+      } finally {
+        animationRef.current = requestAnimationFrame(detect);
       }
-
-      animationRef.current = requestAnimationFrame(detect);
     };
 
     const rafId = requestAnimationFrame(detect);

@@ -163,8 +163,17 @@ export default function CheckCameraPage() {
                   </svg>
                   Camera working
                 </div>
-                <div className="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded">
-                  Live preview
+                <div className="absolute top-3 right-3 flex flex-col items-end gap-2">
+                  <div className="bg-black/60 text-white text-xs font-medium px-2.5 py-1 rounded-full">
+                    Live Camera
+                  </div>
+                  <div
+                    className={`text-xs font-medium px-2.5 py-1 rounded-full ${
+                      faceDetected ? "bg-green-500/90 text-white" : "bg-amber-500/90 text-black"
+                    }`}
+                  >
+                    Live Face Detection: {faceDetected ? "Detected" : "Scanning"}
+                  </div>
                 </div>
                 <FaceDetectionOverlay
                   videoRef={videoRef}
