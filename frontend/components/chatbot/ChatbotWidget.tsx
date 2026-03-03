@@ -143,11 +143,9 @@ export function ChatbotWidget() {
         style={{
           bottom: "calc(max(1.5rem, env(safe-area-inset-bottom)) + 4rem)",
           right: "max(1.5rem, env(safe-area-inset-right))",
-          left: "max(1.5rem, env(safe-area-inset-left))",
           height: "560px",
           maxHeight: "calc(100dvh - 140px)",
         }}
-        className={`fixed z-40 w-full max-w-[400px] sm:max-w-[400px] transition-all duration-300 ease-out ${
       >
         <div className="h-full flex flex-col rounded-xl border border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-2xl overflow-hidden">
           {/* Header */}
