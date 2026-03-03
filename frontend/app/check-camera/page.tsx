@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
+import { FaceDetectionOverlay } from "@/components/FaceDetectionOverlay";
 import { ROUTES } from "@/lib/routes";
 
 type DeviceStatus = "checking" | "working" | "error";
@@ -18,6 +19,7 @@ export default function CheckCameraPage() {
   const [micLevel, setMicLevel] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [isRetrying, setIsRetrying] = useState(false);
+  const [faceDetected, setFaceDetected] = useState(false);
 
   useEffect(() => {
     let audioContext: AudioContext | null = null;
@@ -159,6 +161,11 @@ export default function CheckCameraPage() {
                 <div className="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded">
                   Live preview
                 </div>
+                <FaceDetectionOverlay
+                  videoRef={videoRef}
+                  isActive={cameraStatus === "working"}
+                  onFaceDetected={setFaceDetected}
+                />
               </>
             )}
           </div>
@@ -194,7 +201,7 @@ export default function CheckCameraPage() {
             <div>
               <p className="font-semibold text-white">Camera</p>
               <p className="text-sm text-[var(--text-secondary)]">
-                {cameraStatus === "working" && "Capturing video"}
+                {cameraStatus === "working" && (faceDetected ? "Face detected ✓" : "Capturing video")}
                 {cameraStatus === "error" && "Not detected"}
                 {cameraStatus === "checking" && "Checking..."}
               </p>
@@ -258,6 +265,11 @@ export default function CheckCameraPage() {
         {/* Success message */}
         {allWorking && (
           <div className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex items-start gap-3">
+            {faceDetected && (
+              <div className="mb-6 p-3 rounded-lg bg-green-500/20 border border-green-500/30 text-center">
+                <p className="text-sm font-medium text-green-400">✓ Face detected — you&apos;re ready for your interview!</p>
+              </div>
+            )}
             <svg className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

@@ -65,7 +65,7 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
     const container = containerRef.current;
 
     const detect = async () => {
-      if (!video || video.readyState < 2 || !modelRef.current || !container) return;
+      if (!video || video.readyState < 2 || !modelRef.current) return;
 
       try {
         const predictions = await modelRef.current.estimateFaces(video, false, true);
