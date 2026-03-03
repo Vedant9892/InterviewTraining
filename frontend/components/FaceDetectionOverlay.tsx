@@ -156,23 +156,19 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
             height: faceBox.height,
           }}
         >
-          {/* Bright green rectangular box - directly on the face */}
-          <div className="absolute inset-0 border-[3px] border-green-500 rounded-none" />
-          {/* Facial landmark dots inside the box */}
-          {faceBox.landmarks?.map(([x, y], i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 -ml-1 -mt-1 rounded-full bg-green-500"
-              style={{
-                left: x - faceBox.left,
-                top: y - faceBox.top,
-              }}
-            />
-          ))}
-          {/* "face" label at top-left corner of box */}
-          <div className="absolute top-0 left-0 bg-green-500 text-white text-[10px] font-medium uppercase px-1.5 py-0.5 -translate-y-full mt-0.5">
-            face
-          </div>
+          {/* Face_Identification_GUI style: green hollow square box */}
+          {/* Outer shadow rectangle - darker green, thicker, extends 2px beyond (like cv2.rectangle shadow) */}
+          <div
+            className="absolute rounded-none border-[3px] border-[rgb(0,180,70)]"
+            style={{
+              left: -2,
+              top: -2,
+              right: -2,
+              bottom: -2,
+            }}
+          />
+          {/* Inner main rectangle - bright green hollow box (like cv2.rectangle thickness 2) */}
+          <div className="absolute inset-0 rounded-none border-2 border-[rgb(0,255,100)]" />
         </div>
       )}
       {!faceBox && modelLoaded && (
