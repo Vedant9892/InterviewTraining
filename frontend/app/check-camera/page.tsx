@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { ROUTES } from "@/lib/routes";
 
 const FaceDetectionOverlay = dynamic(
-  () => import("@/components/FaceDetectionOverlay").then((mod) => mod.FaceDetectionOverlay),
+  () => import("@/components/FaceDetectionOverlay").then((mod) => ({ default: mod.FaceDetectionOverlay })),
   { ssr: false }
 );
 

@@ -62,7 +62,6 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
     }
 
     const video = videoRef.current;
-    const container = containerRef.current;
 
     const detect = async () => {
       if (!video || video.readyState < 2 || !modelRef.current) return;
