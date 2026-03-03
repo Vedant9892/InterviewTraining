@@ -1,10 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
-import { FaceDetectionOverlay } from "@/components/FaceDetectionOverlay";
 import { ROUTES } from "@/lib/routes";
+
+const FaceDetectionOverlay = dynamic(
+  () => import("@/components/FaceDetectionOverlay").then((mod) => mod.FaceDetectionOverlay),
+  { ssr: false }
+);
 
 type DeviceStatus = "checking" | "working" | "error";
 
@@ -265,11 +270,6 @@ export default function CheckCameraPage() {
         {/* Success message */}
         {allWorking && (
           <div className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex items-start gap-3">
-            {faceDetected && (
-              <div className="mb-6 p-3 rounded-lg bg-green-500/20 border border-green-500/30 text-center">
-                <p className="text-sm font-medium text-green-400">✓ Face detected — you&apos;re ready for your interview!</p>
-              </div>
-            )}
             <svg className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -277,6 +277,7 @@ export default function CheckCameraPage() {
               <p className="font-medium text-green-400">All devices working!</p>
               <p className="text-sm text-[var(--text-secondary)] mt-1">
                 Your camera and microphone are ready for interview practice.
+                {faceDetected && " Face detected — you're all set!"}
               </p>
             </div>
           </div>
