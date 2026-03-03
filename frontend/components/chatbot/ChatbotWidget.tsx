@@ -142,6 +142,7 @@ export function ChatbotWidget() {
         }`}
         style={{
           bottom: "calc(max(1.5rem, env(safe-area-inset-bottom)) + 4rem)",
+          left: "max(1.5rem, env(safe-area-inset-left))",
           right: "max(1.5rem, env(safe-area-inset-right))",
           height: "560px",
           maxHeight: "calc(100dvh - 140px)",
