@@ -100,8 +100,24 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
 
           const left = (topLeft[0] - offsetX) * scale;
           const top = (topLeft[1] - offsetY) * scale;
-          const width = (bottomRight[0] - topLeft[0]) * scale;
-          const height = (bottomRight[1] - topLeft[1]) * scale;
+          let width = (bottomRight[0] - topLeft[0]) * scale;
+          let height = (bottomRight[1] - topLeft[1]) * scale;
+
+          // Reject degenerate/small boxes - prevents green bar glitch when face partially obscured
+          const minSize = 40;
+          if (
+            width < minSize ||
+            height < minSize ||
+            width <= 0 ||
+            height <= 0 ||
+            width > videoRect.width * 1.5 ||
+            height > videoRect.height * 1.5
+          ) {
+            setFaceBox(null);
+            onFaceDetected?.(false);
+            animationRef.current = requestAnimationFrame(detect);
+            return;
+          }
 
           // Transform landmarks to display coordinates
           let landmarks: [number, number][] | undefined;
@@ -145,7 +161,7 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
   if (!isActive) return null;
 
   return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none">
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none">
       {faceBox && (
         <div
           className="absolute box-border transition-all duration-150"
