@@ -88,19 +88,19 @@ export function FaceDetectionOverlay({ videoRef, isActive, onFaceDetected }: Fac
           const videoWidth = video.videoWidth;
           const videoHeight = video.videoHeight;
 
-          const scaleX = videoRect.width / videoWidth;
-          const scaleY = videoRect.height / videoHeight;
+          // Map video coords to display (object-cover: scale and offset)
+          const scale = Math.max(videoRect.width / videoWidth, videoRect.height / videoHeight);
+          const offsetX = (videoWidth - videoRect.width / scale) / 2;
+          const offsetY = (videoHeight - videoRect.height / scale) / 2;
 
-          const left = topLeft[0] * scaleX;
-          const top = topLeft[1] * scaleY;
-          const width = (bottomRight[0] - topLeft[0]) * scaleX;
-          const height = (bottomRight[1] - topLeft[1]) * scaleY;
-
-          const containerRect = container.getBoundingClientRect();
+          const left = (topLeft[0] - offsetX) * scale;
+          const top = (topLeft[1] - offsetY) * scale;
+          const width = (bottomRight[0] - topLeft[0]) * scale;
+          const height = (bottomRight[1] - topLeft[1]) * scale;
 
           setFaceBox({
-            left: left + (videoRect.left - containerRect.left),
-            top: top + (videoRect.top - containerRect.top),
+            left: Math.max(0, left),
+            top: Math.max(0, top),
             width,
             height,
           });
