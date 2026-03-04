@@ -16,6 +16,12 @@ export default function AboutPage() {
             </Link>
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <Link
+                href={ROUTES.ABOUT}
+                className="text-white font-medium text-sm py-2"
+              >
+                About Us
+              </Link>
+              <Link
                 href={ROUTES.CHECK_CAMERA}
                 className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2"
               >
