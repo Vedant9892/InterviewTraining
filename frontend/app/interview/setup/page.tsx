@@ -55,10 +55,15 @@ export default function InterviewSetupPage() {
               <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
               <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
-            <StatusBadge
-              status={permissionsGranted ? "ready" : "inactive"}
-              label={permissionsGranted ? "Ready" : "Setup Required"}
-            />
+            <div className="flex items-center gap-4">
+              <Link href={ROUTES.ABOUT} className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2">
+                About Us
+              </Link>
+              <StatusBadge
+                status={permissionsGranted ? "ready" : "inactive"}
+                label={permissionsGranted ? "Ready" : "Setup Required"}
+              />
+            </div>
           </div>
         </div>
       </nav>

@@ -98,6 +98,9 @@ function LiveInterviewContent() {
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
                 <span className="text-base sm:text-lg font-semibold text-white truncate">InterviewTraining</span>
               </div>
+              <Link href={ROUTES.ABOUT} className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2 hidden sm:inline">
+                About Us
+              </Link>
               <StatusBadge
                 status={isRecording ? "recording" : "active"}
                 label={isRecording ? "Recording" : "In Progress"}

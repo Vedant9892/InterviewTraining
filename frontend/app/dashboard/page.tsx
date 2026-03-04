@@ -59,6 +59,9 @@ export default function DashboardPage() {
               <span className="text-base sm:text-xl font-semibold text-white truncate">InterviewTraining</span>
             </Link>
             <div className="flex items-center gap-2 sm:gap-4">
+              <Link href={ROUTES.ABOUT} className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2 hidden sm:inline">
+                About Us
+              </Link>
               <Link href={ROUTES.CHECK_CAMERA} className="btn-secondary text-sm px-3 py-2 min-h-[44px] hidden sm:inline-flex items-center">
                 Check Camera
               </Link>

@@ -112,10 +112,15 @@ export default function CheckCameraPage() {
     <div className="app-background min-h-screen min-h-[100dvh]">
       <nav className="border-b border-[var(--border-subtle)] backdrop-blur-sm bg-[var(--bg-primary)]/80 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <Link href={ROUTES.HOME} className="flex items-center space-x-2 hover:opacity-80 transition-opacity w-fit">
-            <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
-            <span className="text-base sm:text-xl font-semibold text-white">InterviewTraining</span>
-          </Link>
+          <div className="flex justify-between items-center">
+            <Link href={ROUTES.HOME} className="flex items-center space-x-2 hover:opacity-80 transition-opacity w-fit">
+              <div className="w-8 h-8 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg" />
+              <span className="text-base sm:text-xl font-semibold text-white">InterviewTraining</span>
+            </Link>
+            <Link href={ROUTES.ABOUT} className="text-[var(--text-secondary)] hover:text-white transition-colors text-sm font-medium py-2">
+              About Us
+            </Link>
+          </div>
         </div>
       </nav>
 
