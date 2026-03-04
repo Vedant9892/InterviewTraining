@@ -158,18 +158,11 @@ function useSpeechRecognition() {
       recognition.lang = "en-US";
 
       recognition.onresult = (e: SpeechRecognitionEvent) => {
-        let final = "";
-        let interim = "";
-        for (let i = e.resultIndex; i < e.results.length; i++) {
-          const result = e.results[i];
-          const transcriptPart = result[0]?.transcript ?? "";
-          if (result.isFinal) {
-            final += transcriptPart;
-          } else {
-            interim += transcriptPart;
-          }
+        let fullTranscript = "";
+        for (let i = 0; i < e.results.length; i++) {
+          fullTranscript += e.results[i][0]?.transcript ?? "";
         }
-        setTranscript((prev) => prev + final + interim);
+        setTranscript(fullTranscript);
       };
 
       recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
