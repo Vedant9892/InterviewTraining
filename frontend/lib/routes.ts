@@ -5,6 +5,7 @@
 
 export const ROUTES = {
   HOME: "/",
+  ABOUT: "/about",
   DASHBOARD: "/dashboard",
   CHECK_CAMERA: "/check-camera",
   INTERVIEW: {
