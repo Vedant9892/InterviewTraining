@@ -307,16 +307,15 @@ export function ChatbotWidget() {
         {isOpen ? <CloseIcon /> : <ChatBubbleIcon />}
       </button>
 
-      {/* Chat panel */}
+      {/* Chat panel - anchored near the toggle icon */}
       <div
-        className={`fixed z-40 w-full max-w-[400px] transition-all duration-300 ease-out ${
+        className={`fixed z-40 w-[min(400px,calc(100vw-2rem))] transition-all duration-300 ease-out ${
           isOpen
             ? "opacity-100 visible translate-y-0 scale-100"
             : "opacity-0 invisible translate-y-5 scale-95 pointer-events-none"
         }`}
         style={{
           bottom: "calc(max(1.5rem, env(safe-area-inset-bottom)) + 4rem)",
-          left: "max(1.5rem, env(safe-area-inset-left))",
           right: "max(1.5rem, env(safe-area-inset-right))",
           height: "560px",
           maxHeight: "calc(100dvh - 140px)",
