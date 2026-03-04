@@ -289,15 +289,13 @@ export function ChatbotWidget() {
       };
       setMessages((prev) => [...prev, botMessage]);
       setIsTyping(false);
-      // Optional: read bot response aloud
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        speakText(response);
-      }
     }, delay);
   };
 
   const handleSpeakMessage = (content: string) => {
-    speakText(content);
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      speakText(content);
+    }
   };
 
   return (
@@ -371,7 +369,19 @@ export function ChatbotWidget() {
                       : "bg-[var(--bg-secondary)] border border-[var(--border-subtle)] text-[var(--text-primary)]"
                   }`}
                 >
-                  <p>{msg.content}</p>
+                  <div className="flex items-start gap-2">
+                    <p className="flex-1">{msg.content}</p>
+                    {!msg.isUser && (
+                      <button
+                        type="button"
+                        onClick={() => handleSpeakMessage(msg.content)}
+                        className="flex-shrink-0 p-1 rounded hover:bg-white/10 transition-colors text-[var(--text-secondary)] hover:text-white"
+                        aria-label="Read aloud"
+                      >
+                        <SpeakerIcon />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -395,18 +405,36 @@ export function ChatbotWidget() {
           {/* Input */}
           <form
             onSubmit={handleSubmit}
-            className="flex gap-3 p-4 border-t border-[var(--border-subtle)] bg-[var(--bg-elevated)]"
+            className="flex gap-2 p-4 border-t border-[var(--border-subtle)] bg-[var(--bg-elevated)]"
           >
             <input
               ref={inputRef}
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Type a message..."
+              placeholder={
+                voiceInput.isListening ? "Listening..." : "Type or speak a message..."
+              }
               autoComplete="off"
               disabled={isTyping}
+              readOnly={voiceInput.isListening}
               className="flex-1 rounded-lg border border-[var(--border-default)] bg-[var(--bg-primary)] px-4 py-3.5 text-[0.9375rem] text-white placeholder-[var(--text-secondary)] focus:border-[var(--accent-primary)] focus:outline-none disabled:opacity-50"
             />
+            {voiceInput.isSupported && (
+              <button
+                type="button"
+                onClick={voiceInput.toggleListening}
+                disabled={isTyping}
+                className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                  voiceInput.isListening
+                    ? "bg-red-500 text-white animate-pulse hover:bg-red-600"
+                    : "bg-[var(--bg-primary)] border border-[var(--border-default)] text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-white"
+                }`}
+                aria-label={voiceInput.isListening ? "Stop listening" : "Start voice input"}
+              >
+                {voiceInput.isListening ? <MicOffIcon /> : <MicIcon />}
+              </button>
+            )}
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
