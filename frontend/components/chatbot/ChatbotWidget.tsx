@@ -138,6 +138,97 @@ function SpeakerIcon() {
   );
 }
 
+function useSpeechRecognition() {
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const [isSupported, setIsSupported] = useState(false);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+
+  useEffect(() => {
+    const SpeechRecognitionAPI =
+      typeof window !== "undefined"
+        ? (window.SpeechRecognition || window.webkitSpeechRecognition)
+        : undefined;
+    setIsSupported(!!SpeechRecognitionAPI);
+
+    if (SpeechRecognitionAPI) {
+      const recognition = new SpeechRecognitionAPI() as SpeechRecognitionInstance;
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      recognition.onresult = (e: SpeechRecognitionEvent) => {
+        let final = "";
+        let interim = "";
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const result = e.results[i];
+          const transcriptPart = result[0]?.transcript ?? "";
+          if (result.isFinal) {
+            final += transcriptPart;
+          } else {
+            interim += transcriptPart;
+          }
+        }
+        setTranscript((prev) => prev + final + interim);
+      };
+
+      recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
+        if (e.error !== "aborted" && e.error !== "no-speech") {
+          console.warn("Speech recognition error:", e.error);
+        }
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+
+    return () => {
+      recognitionRef.current?.abort();
+      recognitionRef.current = null;
+    };
+  }, []);
+
+  const startListening = useCallback(() => {
+    if (!recognitionRef.current || isListening) return;
+    setTranscript("");
+    recognitionRef.current.start();
+    setIsListening(true);
+  }, [isListening]);
+
+  const stopListening = useCallback(() => {
+    if (!recognitionRef.current || !isListening) return;
+    recognitionRef.current.stop();
+    setIsListening(false);
+  }, [isListening]);
+
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  }, [isListening, startListening, stopListening]);
+
+  return { isSupported, isListening, transcript, setTranscript, toggleListening };
+}
+
+function speakText(text: string, onEnd?: () => void) {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+  if (onEnd) {
+    utterance.onend = onEnd;
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
 export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -151,6 +242,8 @@ export function ChatbotWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const voiceInput = useSpeechRecognition();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
