@@ -255,8 +255,18 @@ export function ChatbotWidget() {
     }
   }, [isOpen]);
 
+  // Sync voice transcript to input
+  useEffect(() => {
+    if (voiceInput.transcript) {
+      setInputValue(voiceInput.transcript);
+    }
+  }, [voiceInput.transcript]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (voiceInput.isListening) {
+      voiceInput.toggleListening();
+    }
     const trimmed = inputValue.trim();
     if (!trimmed || isTyping) return;
 
@@ -279,7 +289,15 @@ export function ChatbotWidget() {
       };
       setMessages((prev) => [...prev, botMessage]);
       setIsTyping(false);
+      // Optional: read bot response aloud
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        speakText(response);
+      }
     }, delay);
+  };
+
+  const handleSpeakMessage = (content: string) => {
+    speakText(content);
   };
 
   return (
